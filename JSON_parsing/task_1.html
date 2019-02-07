@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Learning Task_1</title>
+</head>
+<body>
+	<script type="text/javascript">
+		let arr = [ 1,
+				    2,
+				    "Samarth",
+				    "Nasit",
+				    {
+				        first: {
+				            b: function abc(a, b) {
+				                return (a * b);
+				            },
+				            c: 'Hello',
+				            d: 10
+				        }
+				    },
+				    "last one to parse"
+				];
+
+				let string = [];
+				let sum = 0;
+				let str;
+
+				for (let i = 0; i < arr.length; i++) {
+				    if (typeof(arr[i]) == "number") {
+				        sum += arr[i];
+				        string.push('{' + '"' + 'key' + '"' + ': ' + '"' + arr[i] + '"' + ',' + '"' + 'count' + '"' + ': ' + '"' + sum + '"' + '}');
+				    } else if (typeof(arr[i]) == "string") {
+				        string.push('{' + '"' + 'key' + '"' + ': ' + '"' + arr[i] + '"' + ',' + '"' + 'name' + '"' + ': ' + '"' + arr[i] + '"' + '}');
+				    } else if (typeof(arr[i]) == "object") {
+				        str = '';
+				        objTostring(arr[i]);
+				        string.push(str);
+				    }
+				}
+
+				let mystring = JSON.stringify(string, null, "\t");
+				console.log(mystring);
+
+				//console.log(JSON.parse(string));
+				function objTostring(obj) {
+				    let keys = Object.keys(obj);
+				    str += '{';
+
+				    for (let j = 0; j < keys.length; j++) {
+				        str += '"' + keys[j] + '"' + ': ';
+				        if (typeof obj[keys[j]] == "object") {
+				            //str += keys[j] + ": ";
+				            objTostring(obj[keys[j]]);
+				        } else {
+				            if (j == keys.length - 1) {
+				                str += '"' + obj[keys[j]] + '"';
+				            } else {
+				                str += '"' + obj[keys[j]] + '"' + ', ';
+				            }
+				        }
+
+				    }
+				    str += '}';
+
+
+				}
+
+	</script>
+
+</body>
+</html>
