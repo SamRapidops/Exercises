@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+	<title>task_2...</title>	
+
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" id="something">
+				<div class="container" id="main_element" style="margin-top: 20px;">
+					<form>
+						<div class="form-group" id="group_1">
+							<input id="input_text" type="text" class="form-control" placeholder="TextBox" style="width: 60%;border-radius: 10px;border: double; ">
+						</div>
+						<div class="form-group" id="group_2" style="word-spacing: 10px;">
+							<a href="#"><i id="add_ele" class="fa fa-plus-circle fa-2x" aria-hidden="true" style="color: black;" onclick='add_element("main_element")'></i></a>
+							<a href="#"><i id="rem_ele" class="fa fa-minus-circle fa-2x" aria-hidden="true" style="color: black;" onclick="alert('Access Denied!')"></i></a>
+							<a href="#"><i id="up_ele" class="fa fa-arrow-circle-up fa-2x" aria-hidden="true" style="color: black;" onclick='changeLocation("main_element" , "up")'></i></a>
+							<a href="#"><i id="down_ele" class="fa fa-arrow-circle-down fa-2x" aria-hidden="true" style="color: black;" onclick='changeLocation("main_element" , "down")'></i></a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="container">
+					<table class="table" id="table_body" style="width: 50%;margin-top: 20px;position: absolute;text-align: center;">
+					  <thead class="thead-dark" id="move_head">
+					    <tr>
+					      <th scope="col">Table</th>
+					    </tr>
+					  </thead>
+					  <tbody id="body_part">
+					    <tr>
+					      <th scope="row">main_element</th>
+					    </tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript">
+		let counter=1;
+
+		function add_element(element) {
+			let temp = document.getElementById(element);
+			let new_node = temp.cloneNode(true);
+			//console.log(new_node);
+			new_node.id = 'main_element'+counter;
+			changeName(new_node);
+			counter++;
+			new_node.appendAfter(temp);
+			changeTable();
+		}
+
+		Element.prototype.appendAfter = function (element) {
+		  element.parentNode.insertBefore(this, element.nextSibling);
+		},false;
+		
+		function remove_element(element) {
+			let item = document.getElementById(element);
+			item.remove();
+			changeTable();
+		}
+
+		function changeName(element) {
+			let text_change = element.querySelector('#input_text');
+			let add_change = element.querySelector('#add_ele');
+			let rem_change = element.querySelector('#rem_ele');
+			let up_change = element.querySelector('#up_ele');
+			let down_change = element.querySelector('#down_ele');
+			text_change.placeholder = 'main_element'+counter;
+			add_change.setAttribute('onclick' , 'add_element("main_element'+counter+'")');
+			rem_change.setAttribute('onclick' , 'remove_element("main_element'+counter+'")');
+			up_change.setAttribute('onclick' , 'changeLocation("main_element'+counter+'" , "up")');
+			down_change.setAttribute('onclick' , 'changeLocation("main_element'+counter+'" , "down")');
+		}
+
+		function changeLocation(element , i) {
+			let a = document.getElementById(element);
+			if(i == "up")
+			{	
+				if(a.previousElementSibling != null)
+				{
+					let x = a.previousElementSibling;
+					a.parentNode.insertBefore(a , x);
+				}
+			}
+			else
+			{
+				if(a.nextElementSibling != null)
+				{
+					let y = a.nextElementSibling;
+					a.parentNode.insertBefore(y , a);
+
+				}
+			}
+			changeTable();
+		}
+
+		function changeTable() {
+			let arr = document.getElementById("something").childNodes;
+
+			let node = document.getElementById("body_part");
+			while (node.hasChildNodes()) {
+			  node.removeChild(node.firstChild);
+			}
+
+			for(let i=1;i<arr.length-1;i++)
+			{
+				let rw = node.insertRow();
+				let cell = rw.insertCell();
+				cell.innerHTML = arr[i].id; 
+			}
+
+		}
+
+
+
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+ 
+</body>
+</html>
