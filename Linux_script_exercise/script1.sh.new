@@ -1,0 +1,12 @@
+#! /bin/bash
+
+rename()
+{
+	for file in "$1"/*
+	do 
+		mv $file $file.new
+	done
+
+}
+
+rename "."
