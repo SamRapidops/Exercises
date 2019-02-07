@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OOPs concept</title>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+	
+	// class , constructor ..................
+
+	class Name {
+		constructor(fname, lname){
+			this.fname = fname;
+			this.lname = lname;
+		}
+
+		// methods of class .............
+		showName(){
+			alert(this.fname + ' ' + this.lname);
+		}
+
+		// getter & setter for name class.......
+		get fullName(){
+			return `${this.fname} ${this.lname}`;
+		}
+
+		set fullName(value){
+			[this.fname , this.lname] = value.split(" ");
+		}
+
+		close(){
+			alert(`${this.fname} ${this.lname} is closed.....!`);
+		}
+	}
+
+	let name1 = new Name ('Samarth' , 'Nasit');
+	console.log(name1.fname);
+	let name2 = new Name ('Sam' , 'Patel');
+	name2.showName();
+
+	name2.fullName = "Joy Gohil";
+
+	console.log(name2.fname);
+	console.log(name2.lname);
+
+
+	// inheritance in class ...............
+	// and also Method overriding ..............
+	class superName extends Name {
+		open(){
+			alert(`${this.fname} ${this.lname} is opened......!`);
+		}
+
+		showName(){
+			super.showName();
+			alert("showName function is overrided........!");
+		}
+	}
+
+	let name3 = new superName ('Prashant' , 'Jeswani');
+
+	name3.close();
+	name3.open();
+
+	name3.showName();
+
+	// checking instance of class and also inherited class..............
+	alert(name1 instanceof superName );
+	alert(name2 instanceof superName );
+	alert(name3 instanceof superName );
+
+	// try and catch example of error handling...........
+	try {
+		alert("hey Sam.......");
+		hellow;
+	}catch(err) {
+		alert(err);
+	}
+
+
+
+</script>
+
+
+</body>
+</html>
