@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Learning Task_1</title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		
+		let arr = [ 1,
+					2,
+					"Samarth",
+					"Nasit",
+					{ 
+						first:  
+							{ 	
+								b: function abc(a,b) { return (a*b); }, 
+							 	c: 'Hello',
+							 	d: 10 
+							 } 
+					},
+					"last one to parse"
+		];
+
+		let string = [];
+		let sum=0;
+
+		for (let i=0;i<arr.length;i++)
+		{
+			if(typeof(arr[i]) == "number")
+			{
+				sum += arr[i];
+				string.push("{ " + "key" + ": " + arr[i] + "," + "count" + ": " + sum + " }");
+				//string.push("key" , ": " , arr[i] ,);
+				//string.push(" count" , ": " , sum);
+				//string.push(" }");
+
+			}
+
+			else if(typeof(arr[i]) == "string")
+			{
+				string.push("{ " + "key" + ": " + arr[i] + "," + "name" + ": " + arr[i] + " }");
+
+			}
+
+			else if(typeof(arr[i]) == "object")
+			{
+				 var convertedString=JSON.stringify(arr[i]) 
+				 console.log("literal object is",arr[i] ,typeof arr[i]);
+				 console.log("converted string :",convertedString);
+				 console.log(" convertedString type:",typeof convertedString);
+			}
+		}
+
+		console.log(string);
+
+
+	</script>
+
+</body>
+</html>
